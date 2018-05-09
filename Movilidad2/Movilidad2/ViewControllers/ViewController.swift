@@ -7,26 +7,47 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-
-    @IBOutlet var convocatoriasTableView: UITableView!
-    
-    var movilidadFecha = ["2018", "2017", "2016", "2015"]
-    
+class ViewController: UIViewController{
+    //    MARK:- VARIABLES
+    var fireDB: DatabaseReference!
+    var rowSelected: Int?
+    var sectionSelected: Int?
+    var movilidadFecha = [Int]()
     var movilidad = [
-        Formulario(tipo: "nacional"),
-        Formulario(tipo: "internacional"),
-        Formulario(tipo:"posgrado")
+        Formulario(tipo: "Nacional"),
+        Formulario(tipo: "Internacional"),
+        Formulario(tipo:"Posgrado"),
+        
     ]
-    
+    var responseDB: [String:[String:String]]?
+    //    MARK: - OUTLETS
+    @IBOutlet var convocatoriasTableView: UITableView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         convocatoriasTableView.delegate = self
         convocatoriasTableView.dataSource = self
+        //Se crea la referencia a la base de datos
+        fireDB = Database.database().reference()
+        //Se hace la consulta directa a la base de datos en firebase y trae todo
+        fireDB.observeSingleEvent(of: DataEventType.value) { (aDataSnapShot) in
+            if let keys = aDataSnapShot.value as? [String: [String: String]]{
+                self.responseDB = keys
+                for key in keys{
+                    //Se agregan a al arreglo los años registrados en la base de datos.
+                    self.movilidadFecha.append(Int(key.key)!)
+                }
+                //Se ordena de mayor a menenor o de menor a mayor
+                self.movilidadFecha.sort{$0>$1}
+                //Vuelve a cargar la tabla
+                self.convocatoriasTableView.reloadData()
+            }
+        }
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -39,6 +60,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let destination = segue.destination as? ConsultarViewController {
             destination.movilidad = movilidad[(convocatoriasTableView.indexPathForSelectedRow?.row)!]
+            let arrRowValue = movilidad[rowSelected!].tipo
+            let arrSectionValue = movilidadFecha[sectionSelected!]
+            
+           
+            if let aResponse = responseDB, let yearValue = aResponse["\(arrSectionValue)"], let url = yearValue[arrRowValue]{
+                print(url)
+                destination.strURL = url
+            }
         }
         let backItem = UIBarButtonItem()
         backItem.title = "Atrás"
@@ -52,13 +81,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
 //    }
     
+}
+//MARK:- EXTENSIONS
+extension ViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return movilidadFecha.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = movilidadFecha[section]
+        label.text = "\(movilidadFecha[section])"
         label.backgroundColor = UIColor.lightGray
         label.textAlignment = .center
         return label
@@ -76,6 +108,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        sectionSelected = indexPath.section
+        rowSelected = indexPath.row
         performSegue(withIdentifier: "goToSelection", sender: self)
     }
 }

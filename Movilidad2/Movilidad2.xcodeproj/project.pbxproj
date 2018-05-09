@@ -17,6 +17,7 @@
 		849C187B209FBEA900F3B8D1 /* GestionarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C187A209FBEA900F3B8D1 /* GestionarViewController.swift */; };
 		849C1880209FCF9600F3B8D1 /* Formulario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C187F209FCF9600F3B8D1 /* Formulario.swift */; };
 		849C1882209FE8AF00F3B8D1 /* ConsultarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C1881209FE8AF00F3B8D1 /* ConsultarViewController.swift */; };
+		BFF3875020A28C93004F04CC /* ConvocatoriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3874F20A28C93004F04CC /* ConvocatoriaViewController.swift */; };
 		F915B0666275EC1433E2D217 /* Pods_Movilidad2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C187BBBF34C7F6E7E9D43CD /* Pods_Movilidad2.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		849C187A209FBEA900F3B8D1 /* GestionarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionarViewController.swift; sourceTree = "<group>"; };
 		849C187F209FCF9600F3B8D1 /* Formulario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formulario.swift; sourceTree = "<group>"; };
 		849C1881209FE8AF00F3B8D1 /* ConsultarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultarViewController.swift; sourceTree = "<group>"; };
+		BFF3874F20A28C93004F04CC /* ConvocatoriaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvocatoriaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				849C187A209FBEA900F3B8D1 /* GestionarViewController.swift */,
 				844F2E90209FA0A600786D61 /* ViewController.swift */,
 				849C1878209FA7D400F3B8D1 /* LogInViewController.swift */,
+				BFF3874F20A28C93004F04CC /* ConvocatoriaViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				844F2E8F209FA0A600786D61 /* AppDelegate.swift in Sources */,
 				849C1879209FA7D400F3B8D1 /* LogInViewController.swift in Sources */,
 				849C187B209FBEA900F3B8D1 /* GestionarViewController.swift in Sources */,
+				BFF3875020A28C93004F04CC /* ConvocatoriaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,8 +445,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3FVH43E867;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Movilidad2/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,8 +465,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3FVH43E867;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Movilidad2/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
